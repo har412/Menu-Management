@@ -16,7 +16,7 @@ exports.createMenu = (req, res) => {
         // res.send(data)
         // Now get id of new object created and store it in parent.
         // to find parent use parent_id 
-        if(parent_id==null){
+        if(parent_id==='0'){
             res.json({"message":"New parent created as parent id is null","data":data})
         } else {
             Menu.find({ "_id": parent_id }).then(foundData => {
@@ -46,7 +46,7 @@ exports.createMenu = (req, res) => {
 
 exports.getParentIsNull = (req, res) => {
     
-    Menu.find({ "parent_id": null })
+    Menu.find({ "parent_id": "0" })
         .populate(
             {
                 path:"child"
@@ -65,7 +65,14 @@ exports.getCreateMenuPage = (req, res) => {
 }
 
 exports.deleteMenu = (req, res) => {
-  
+    Menu.updateMany({ child: req.params.id }, { $pull: { child: req.params.id } })
+    .then(data=>{
+        console.log(data)
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+
     Menu.deleteOne({"_id":req.params.id})
     .then(data=>{
         res.send(data)
@@ -100,19 +107,24 @@ if(name!=null){
    
 };
 
-
+exports.getAllMenu = (req,res)=>{
+    Menu.find({}).then(data=>{
+        res.send(data)
+    })
+    .catch(err=>{
+        res.send(err)
+    })
+}
 
 
 exports.getMenuDisplay = (req, res) => {
  
-      Menu.find({ "parent_id": null })
-      .populate(
-          {
-              path:"child"
-          }
-      )
+    
+
+
+      Menu.find({ "parent_id": "0" })
       .then(menuItems => {
-        res.render('menuDisplay',{menuItems})
+     res.send(menuItems)
       }).catch(err => {
           res.send(err)
       })

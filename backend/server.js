@@ -1,10 +1,10 @@
 const app =  require('express')();
 const express = require('express')
-
+const cors = require('cors')
 //json body parser
 app.use(express.json())
 const menuRouter = require('./routes/menuRoute')
-
+app.use(cors({origin:"*"}))
 const db =  require('./config/dbconnect')
 
 // menu Router
