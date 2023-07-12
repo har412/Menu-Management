@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 
 
  module.exports = ()=>{
-    mongoose.connect('mongodb://localhost:27017/menu-management')
+    mongoose.connect('mongodb+srv://harkirat:12345678aA@cluster0.wxyr5kj.mongodb.net/Cluster0?retryWrites=true&w=majority')
     .then(data=>{
         console.log("connected ")
     })

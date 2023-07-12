@@ -7,18 +7,13 @@ name:{
     required:true
 },
 parent_id:{
-    type:String,
+    type:String
 }
 ,
 child:[
     {
         type:mongoose.Schema.Types.ObjectId,
         ref:'Menu'
-    }
-],
-children:[
-    {
-        type:Object
     }
 ]
 

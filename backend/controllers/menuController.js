@@ -16,7 +16,7 @@ exports.createMenu = (req, res) => {
         // res.send(data)
         // Now get id of new object created and store it in parent.
         // to find parent use parent_id 
-        if(parent_id==='0'){
+        if(parent_id=='0'){
             res.json({"message":"New parent created as parent id is null","data":data})
         } else {
             Menu.find({ "_id": parent_id }).then(foundData => {
@@ -26,7 +26,6 @@ exports.createMenu = (req, res) => {
                 const final = {
                     "name": foundData[0].name,
                     "child": child_data,
-                    "children": child_data,
                     "parent_id":foundData[0].parent_id
                 }
                 Menu.findByIdAndUpdate(parent_id, final).then(response => {

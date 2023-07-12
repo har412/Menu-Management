@@ -59,8 +59,8 @@ function Createmenu() {
                         <select name="" id="" class="custom-select my-3" ref={menuRef} >
                              <option value="0" defaultChecked ></option>
                              { 
-                                menu.map((data)=>(
-                                    <option value={data._id}>{data.name}</option>
+                              menu.map((data)=>(
+                                    <option value={data._id ? data._id : "0"}>{data.name}</option>
                                 ))
                             }
                          
