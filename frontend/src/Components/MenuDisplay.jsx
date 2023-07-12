@@ -9,22 +9,38 @@ function MenuDisplay() {
     console.log("menu")
     const editMenu = (id) => {
         console.log(id)
+        const name = prompt("Enter the Updated name")
+        const body ={
+            "id":id,
+            "name":name
+        }
+        axios.put(`http://localhost:8080/update-menu`,body)
+        .then((data)=>{
+            console.log(data)
+            window.location.reload()
+        })
+         
+         .catch(err=>{
+             console.log(err)
+         })  
     }
     const deleteMenu = (id) => {
        axios.delete(`http://localhost:8080/delete-menu/${id}`)
-       .then(data=>
-        console.log(data))
-        
-        .catch(err=>{
-            console.log(err)
-        })  
+       .then((data)=>{
+        console.log(data)
+        window.location.reload()
+    })
+     
+     .catch(err=>{
+         console.log(err)
+     })  
     }
     useEffect(() => {
-        axios.get('http://localhost:8080/menu')
+        axios.get('http://localhost:8080/parent-is-null')
             .then(res => {
                 console.log(typeof (res));
-                console.log(res.data);
-                setMenuItems(res.data)
+                console.log(res.data.data,"first");
+                setMenuItems(res.data.data)
             })
             .catch(err => {
                 console.log(err)
@@ -62,7 +78,7 @@ function MenuDisplay() {
                                 </a>
                                 {menuItem.child && menuItem.child.length > 0 && (
                                     
-                                    <ul>{menuItem.child.map((childMenu) => <DisplayMenuItems menuItems={[childMenu]} />)}</ul>
+                                    <ul>{menuItem.child.map((child) => <DisplayMenuItems child={[child]} />)}</ul>
                                 )}
                             </li>
                         ))

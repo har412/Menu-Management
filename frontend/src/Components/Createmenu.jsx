@@ -35,6 +35,17 @@ function Createmenu() {
             console.log(err)
         })
     }
+    const deleteAll = () =>{
+        axios.delete('http://localhost:8080/delete-all')
+        .then(res=>{
+            console.log(res)
+          navigate('display')
+            
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+    }
     return (
 
         <>
@@ -54,8 +65,11 @@ function Createmenu() {
                             }
                          
                         </select>
+                        <div class="d-flex justify-content-center my-3">
+                            <button class="btn btn-success" onClick={submitHandle} >Submit</button>
+                        </div>
                         <div class="d-flex justify-content-center">
-                            <button class="btn btn-danger" onClick={submitHandle} >Submit</button>
+                            <button class="btn btn-danger" onClick={deleteAll} >Delete All Menu's</button>
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">

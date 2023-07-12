@@ -1,31 +1,30 @@
-const mongoose = require('mongoose');
-
-const childSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true
-  },
-  parent_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Menu'
-  },
-  child: [{}]
-});
+const mongoose = require('mongoose')
 
 const menuSchema = mongoose.Schema({
-  name: {
-    type: String,
-    required: true
-  },
-  parent_id: {
+
+name:{
     type:String,
     required:true
-  },
-  child: [childSchema]
-});
+},
+parent_id:{
+    type:String,
+}
+,
+child:[
+    {
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Menu'
+    }
+],
+children:[
+    {
+        type:Object
+    }
+]
+
+})
 
 
+const Menu = mongoose.model('Menu',menuSchema)
 
-const Menu = mongoose.model('Menu', menuSchema);
-
-module.exports = Menu;
+module.exports= Menu

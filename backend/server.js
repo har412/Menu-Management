@@ -9,8 +9,7 @@ const db =  require('./config/dbconnect')
 
 // menu Router
 app.use('/',menuRouter)
-//set ejs
-app.set('view engine', 'ejs');
+
 
 // db connection
 db();
