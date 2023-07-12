@@ -14,7 +14,7 @@ function MenuDisplay() {
             "id":id,
             "name":name
         }
-        axios.put(`http://localhost:8080/update-menu`,body)
+        axios.put(`https://menu-management.onrender.com/update-menu`,body)
         .then((data)=>{
             console.log(data)
             window.location.reload()
@@ -25,7 +25,7 @@ function MenuDisplay() {
          })  
     }
     const deleteMenu = (id) => {
-       axios.delete(`http://localhost:8080/delete-menu/${id}`)
+       axios.delete(`https://menu-management.onrender.com/delete-menu/${id}`)
        .then((data)=>{
         console.log(data)
         window.location.reload()
@@ -36,7 +36,7 @@ function MenuDisplay() {
      })  
     }
     useEffect(() => {
-        axios.get('http://localhost:8080/parent-is-null')
+        axios.get('https://menu-management.onrender.com/parent-is-null')
             .then(res => {
                 console.log(typeof (res));
                 console.log(res.data.data,"first");

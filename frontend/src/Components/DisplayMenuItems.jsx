@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import axios from 'axios'
 
 function DisplayMenuItems(props) {
     console.log(props.child,"in")
     console.log(typeof(props.child[0]))
+    useEffect(()=>{
+      if(typeof(props.child[0])==String){
+        
+      }
+    },[])
+
     const editMenu = (id) => {
         console.log(id)
         const name = prompt("Enter the Updated name")
@@ -11,7 +17,7 @@ function DisplayMenuItems(props) {
             "id":id,
             "name":name
         }
-        axios.put(`http://localhost:8080/update-menu`,body)
+        axios.put(`https://menu-management.onrender.com/update-menu`,body)
         .then((data)=>{
             console.log(data)
             window.location.reload()
@@ -22,7 +28,7 @@ function DisplayMenuItems(props) {
          })  
     }
     const deleteMenu = (id) => {
-       axios.delete(`http://localhost:8080/delete-menu/${id}`)
+       axios.delete(`https://menu-management.onrender.com/delete-menu/${id}`)
        .then((data)=>{
         console.log(data)
         window.location.reload()

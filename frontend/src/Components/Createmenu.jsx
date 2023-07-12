@@ -9,7 +9,7 @@ function Createmenu() {
     const name = useRef()
     const navigate = useNavigate()
     useEffect(()=>{
-        axios.get('http://localhost:8080/all-menu')
+        axios.get('https://menu-management.onrender.com/all-menu')
         .then(res=>{
             console.log(res)
             setMenu(res.data)
@@ -26,7 +26,7 @@ function Createmenu() {
             "name":name.current.value,
             "parent_id":menuRef.current.value
         }
-        axios.post('http://localhost:8080/create-menu',data)
+        axios.post('https://menu-management.onrender.com/create-menu',data)
         .then(res=>{
             console.log(res)
             navigate('/display')
@@ -36,7 +36,7 @@ function Createmenu() {
         })
     }
     const deleteAll = () =>{
-        axios.delete('http://localhost:8080/delete-all')
+        axios.delete('https://menu-management.onrender.com/delete-all')
         .then(res=>{
             console.log(res)
           navigate('display')
