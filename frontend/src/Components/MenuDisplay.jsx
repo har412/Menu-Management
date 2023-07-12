@@ -17,7 +17,15 @@ function MenuDisplay() {
         axios.put(`https://menu-management.onrender.com/update-menu`,body)
         .then((data)=>{
             console.log(data)
-            window.location.reload()
+            axios.get('https://menu-management.onrender.com/parent-is-null')
+            .then(res => {
+                console.log(typeof (res));
+                console.log(res.data.data,"first");
+                setMenuItems(res.data.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
         })
          
          .catch(err=>{
@@ -28,7 +36,15 @@ function MenuDisplay() {
        axios.delete(`https://menu-management.onrender.com/delete-menu/${id}`)
        .then((data)=>{
         console.log(data)
-        window.location.reload()
+        axios.get('https://menu-management.onrender.com/parent-is-null')
+            .then(res => {
+                console.log(typeof (res));
+                console.log(res.data.data,"first");
+                setMenuItems(res.data.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
     })
      
      .catch(err=>{
@@ -78,7 +94,7 @@ function MenuDisplay() {
                                 </a>
                                 {menuItem.child && menuItem.child.length > 0 && (
                                     
-                                    <ul>{menuItem.child.map((child) => <DisplayMenuItems child={[child]} />)}</ul>
+                                    <ul>{menuItem.child.map((child) => <DisplayMenuItems setMenuItems={setMenuItems} child={[child]} />)}</ul>
                                 )}
                             </li>
                         ))

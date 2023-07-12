@@ -2,6 +2,9 @@ import React, { useEffect } from 'react'
 import axios from 'axios'
 
 function DisplayMenuItems(props) {
+
+    
+
     console.log(props.child,"in")
     console.log(typeof(props.child[0]))
     useEffect(()=>{
@@ -20,7 +23,15 @@ function DisplayMenuItems(props) {
         axios.put(`https://menu-management.onrender.com/update-menu`,body)
         .then((data)=>{
             console.log(data)
-            window.location.reload()
+            axios.get('https://menu-management.onrender.com/parent-is-null')
+            .then(res => {
+                console.log(typeof (res));
+                console.log(res.data.data,"first");
+                props.setMenuItems(res.data.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
         })
          
          .catch(err=>{
@@ -31,7 +42,15 @@ function DisplayMenuItems(props) {
        axios.delete(`https://menu-management.onrender.com/delete-menu/${id}`)
        .then((data)=>{
         console.log(data)
-        window.location.reload()
+        axios.get('https://menu-management.onrender.com/parent-is-null')
+            .then(res => {
+                console.log(typeof (res));
+                console.log(res.data.data,"first");
+                props.setMenuItems(res.data.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
     })
      
      .catch(err=>{
